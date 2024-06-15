@@ -1,18 +1,29 @@
-import http from 'http';
+import express from 'express';
+import Iusuario from './types/Iusuario';
 
-const rotas:  { [key: string]: string }= {
-    '/' : 'Curso de express',
-    '/padrao' : 'padrao'
-}
+const app = express()
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  if (req.url){
-    res.end(rotas[req.url]);
-  }
+const usuarios:Iusuario[] = [
+    {
+        id: 0,
+        username: "joserasj",
+        password: "12345"
+    },
+    {
+        id: 1,
+        username: "admin",
+        password: "admin"
+    }
+]
+app.get("/", (req, res) => {
+  res.status(200).send("Curso")
 });
 
+app.get("/users", (req,res) => {
+    res.status(200).json(usuarios)
+})
+
 const PORT = 3000;
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
