@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setUsuariosData = exports.getUsuariosData = void 0;
-let usuarios = [
+exports.usuarios = void 0;
+exports.usuarios = [
     {
-        'id': 0,
-        'username': "joserasj",
-        'password': "12345"
+        id: 0,
+        username: "joserasj",
+        password: "12345"
     },
     {
-        'id': 1,
-        'username': "admin",
-        'password': "admin"
+        id: 1,
+        username: "admin",
+        password: "admin"
     }
 ];
-const getUsuariosData = () => usuarios;
-exports.getUsuariosData = getUsuariosData;
-const setUsuariosData = (newUsers) => {
-    usuarios = newUsers;
-};
-exports.setUsuariosData = setUsuariosData;
+// export const getUsuariosData = () : Iusuario[] => usuarios;
+// export const setUsuariosData = (newUsers: Iusuario[]): void => {
+//   usuarios = newUsers;
+// };
