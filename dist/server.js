@@ -4,25 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const app = (0, express_1.default)();
-const usuarios = [
-    {
-        id: 0,
-        username: "joserasj",
-        password: "12345"
-    },
-    {
-        id: 1,
-        username: "admin",
-        password: "admin"
-    }
-];
-app.get("/", (req, res) => {
-    res.status(200).send("Curso");
-});
-app.get("/users", (req, res) => {
-    res.status(200).json(usuarios);
-});
+// Middleware para analisar o corpo das requisições como JSON
+app.use(express_1.default.json());
+app.use("/", userRoutes_1.default);
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

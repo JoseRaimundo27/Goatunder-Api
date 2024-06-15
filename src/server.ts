@@ -1,27 +1,12 @@
 import express from 'express';
-import Iusuario from './types/Iusuario';
+import userRoutes from './routes/userRoutes';
 
-const app = express()
+const app = express();
 
-const usuarios:Iusuario[] = [
-    {
-        id: 0,
-        username: "joserasj",
-        password: "12345"
-    },
-    {
-        id: 1,
-        username: "admin",
-        password: "admin"
-    }
-]
-app.get("/", (req, res) => {
-  res.status(200).send("Curso")
-});
+// Middleware para analisar o corpo das requisições como JSON
+app.use(express.json());
 
-app.get("/users", (req,res) => {
-    res.status(200).json(usuarios)
-})
+app.use("/", userRoutes)
 
 const PORT = 3000;
 app.listen(PORT, () => {
