@@ -1,14 +1,21 @@
 import { Router } from 'express';
 import { createUsers, deleteUser, getHome, getUsers, getUsersById, loginUser, updateUser } from '../controllers/userControllers';
+import { authTokenMiddleware } from '../middlewares/authTokenMiddleware';
 
 const router = Router();
 
 router.get('/', getHome);
-router.get('/users', getUsers);
-router.get('/users/:id', getUsersById);
-router.post('/users', createUsers);
-router.put('/users/:id', updateUser);
-router.delete('/users/:id', deleteUser);
-router.post('/login', loginUser)
+//Rotas protegidas por token de acesso ( apenas logados)
+router.get('/users',authTokenMiddleware, getUsers);
+router.get('/users/:id',authTokenMiddleware, getUsersById);
+router.post('/users',authTokenMiddleware, createUsers);
+router.put('/users/:id',authTokenMiddleware, updateUser);
+router.delete('/users/:id', authTokenMiddleware,deleteUser);
+
+//Rota para logar
+router.post('/login', loginUser) //Rota para fazer login: cria o token da autenticação
+
+//Rota protegida, apenas usuários admins:
+// router.get('/admin' , authTokenMiddleware,)
 
 export default router;
