@@ -18,7 +18,6 @@ export const authTokenMiddleware = (req: Request, res: Response, next: NextFunct
         if (err) {
             return res.status(403).send("Token inválido.");
         }
-
         next();
         
     })

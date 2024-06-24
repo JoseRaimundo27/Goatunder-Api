@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import dotenv from 'dotenv';
+import { connectDB } from './config/database';
+
+
 
 // Carregar as variáveis de ambiente do arquivo .env
 dotenv.config();
@@ -15,10 +18,12 @@ app.use(cors());
 app.use(express.json());
 
 // Montar userRoutes no caminho base /api
-app.use('/api', userRoutes);
+app.use('/', userRoutes);
 
 // Usar a variável de ambiente PORT ou padrão para 3000
 const PORT = process.env.PORT || 3000;
+
+connectDB();
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
